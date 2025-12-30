@@ -1,3 +1,156 @@
-# Comunicacion_XtraChallenge
-## Recepción y tratamiento de datos mediante la comunicación con ESP32
-Durante el XtraChallenge se generan constantemente eventos de tiempo que deben registrarse con precisión (inicio, parada y duración de diferentes fases como vuelo, carga o preparación). Hasta ahora, estos eventos se gestionaban de forma manual con cronómetros independientes, lo que dificultaba su sincronización y su posterior explotación. Para mejorar la fiabilidad del proceso y facilitar la creación de contenido durante la retransmisión, Poliwood propone un sistema centralizado: una Raspberry Pi actuará como servidor de cronometraje, mientras que varios M5Stack funcionarán como dispositivos de control distribuidos. Cada M5 enviará eventos al servidor, que mantendrá los cronómetros oficiales y permitirá visualizar en tiempo real su evolución a través de una interfaz web. Este sistema garantiza un registro unificado, facilita el almacenamiento duplicado de datos para Xtra2 y abre la puerta a generar visualizaciones y contenidos dinámicos basados en los tiempos oficiales de la competición.
+# 🕒 XtraChrono  
+## Sistema centralizado de cronometraje para XtraChallenge
+
+XtraChrono es un sistema de cronometraje distribuido diseñado para registrar
+eventos temporales con precisión durante el XtraChallenge. El proyecto surge
+como alternativa a la gestión manual mediante cronómetros independientes,
+mejorando la sincronización, fiabilidad y explotación de los datos generados
+durante la competición.
+
+---
+
+## 📌 Contexto del proyecto
+
+Durante el XtraChallenge se generan múltiples eventos de tiempo (inicio,
+pausa y duración de diferentes fases como vuelo, carga o preparación).
+La gestión manual de estos eventos dificulta su sincronización y posterior
+uso en retransmisiones o análisis.
+
+XtraChrono propone una solución basada en un **servidor centralizado** y
+**clientes distribuidos**, permitiendo un registro unificado y visualización
+en tiempo real de los tiempos oficiales.
+
+---
+
+## 🧠 Arquitectura general
+
+El sistema sigue una arquitectura **cliente-servidor**:
+
+- 🖥️ **Servidor central (Node.js en Raspberry Pi)**  
+  Mantiene el cronómetro oficial y gestiona los eventos.
+
+- 📟 **Clientes M5Stack**  
+  Actúan como terminales de control distribuidos.
+
+- 🌐 **Cliente web**  
+  Permite monitorización y control visual en tiempo real.
+
+---
+
+## 🔌 Comunicación
+
+La comunicación se realiza mediante:
+
+- **HTTP** para eventos discretos (start / pause / stop)
+- **WebSocket** para transmisión continua del tiempo
+
+---
+
+## 📂 Estructura del proyecto
+
+```text
+├── client-m5stack/        # Cliente distribuido (estructura conceptual)
+├── docs/                  # Documentación técnica
+│   ├── arquitectura.md
+│   ├── decisiones_tecnicas.md
+│   └── referencias.md
+├── public/                # Cliente web
+│   ├── index.html
+│   ├── index.js
+│   ├── styles.css
+│   └── logo-poliwood.png
+├── src/                   # Servidor
+│   ├── core/
+│   ├── http/
+│   ├── ws/
+│   └── utils/
+├── tests/                 # Pruebas básicas
+├── server.js
+├── package.json
+└── README.md
+```
+
+## ⚙️ Funcionamiento del sistema
+
+1. El usuario interactúa con un cliente (web o M5Stack).
+2. El cliente envía un evento HTTP al servidor.
+3. El servidor actualiza el cronómetro oficial.
+4. El tiempo se envía en tiempo real mediante WebSocket.
+5. Los clientes actualizan su visualización.
+
+El cronómetro oficial reside únicamente en el servidor, garantizando
+coherencia entre todos los dispositivos.
+
+---
+
+## 🚀 Ejecución del servidor
+
+### Requisitos
+- Node.js ≥ 18
+- npm
+
+### Instalación y ejecución
+
+```bash
+npm install
+node server.js
+```
+
+El servidor quedará accesible en:
+
+http://localhost:3000
+
+## 🧪 Tests
+
+Se incluyen pruebas básicas para validar la lógica principal del sistema:
+
+```text
+node tests/cronometro.test.js
+node tests/server.test.js
+```
+
+Estas pruebas verifican el comportamiento del cronómetro y la respuesta
+del servidor.
+
+## 🎨 Interfaz gráfica
+
+El cliente web presenta una interfaz minimalista y profesional, alineada con
+la identidad visual de Poliwood, pensada para su uso durante retransmisiones
+en directo.
+
+Incluye:
+
+**Visualización del tiempo en tiempo real**
+
+**Botones de control**
+
+**Indicador de estado de conexión**
+
+---
+
+## 🔮 Líneas futuras
+
+Persistencia de datos de cronometraje
+
+Clientes M5Stack completamente funcionales
+
+Mejora de la sincronización temporal
+
+Generación de visualizaciones dinámicas para retransmisión
+
+Control de múltiples cronómetros simultáneos
+
+## 🧾 Notas finales
+
+Este proyecto prioriza la solidez arquitectónica y la claridad conceptual,
+dejando algunas funcionalidades avanzadas fuera del alcance de la
+implementación final por motivos de tiempo.
+
+La estructura modular del sistema permite su evolución futura sin
+replantear el diseño base.
+
+*Proyecto desarrollado en el contexto académico de INTERA*
+
+**Poliwood · Universitat Politècnica de València**
+
+![logo poliwood](/logo-poliwood-negro.png)
