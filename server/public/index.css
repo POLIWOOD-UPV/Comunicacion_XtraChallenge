@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600&display=swap');
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base */
+body {
+    background: #fcf7d7;
+    font-family: 'Montserrat', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffece6;
+}
+
+/* Contenedor principal */
+.container {
+    width: 420px;
+    background: #4d1f1f;
+    border-radius: 14px;
+    padding: 32px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    text-align: center;
+}
+
+/* Header */
+header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    letter-spacing: 2px;
+    color: #ffece6;
+}
+
+.subtitle {
+    font-size: 0.85rem;
+    color: #fcb1b1;
+    margin-bottom: 30px;
+}
+
+/* Timer */
+.timer {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+    color: #ffece6;
+}
+
+/* Controles */
+.controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.1s ease, opacity 0.2s;
+}
+
+.btn:active {
+    transform: scale(0.96);
+}
+
+/* Botones */
+.start {
+    background: #d61a1a;
+    color: #ffece6;
+}
+
+.start:hover {
+    opacity: 0.9;
+}
+
+.pause {
+    background: #fcb1b1;
+    color: #4d1f1f;
+}
+
+.pause:hover {
+    opacity: 0.9;
+}
+
+.stop {
+    background: #990000;
+    color: #ffece6;
+}
+
+.stop:hover {
+    opacity: 0.9;
+}
+
+/* Footer */
+footer {
+    font-size: 0.75rem;
+    color: #fcb1b1;
+}
+
+/* Header con logo */
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    width: 120px;
+    height: auto;
+    margin-bottom: 5px;
+    opacity: 0.95;
+}

@@ -1,17 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>XtraChrono · Control de Tiempo</title>
+
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <h1>Cronómetro</h1>
-    <button id="startBtn">Iniciar</button>
-    <button id="pauseBtn">Pausar</button>
-    <button id="stopBtn">Detener</button>
-    <p>Tiempo: <span id="tiempo">0</span></p>
 
-    <script src="viewer.js"></script>
+    <div class="container">
+        <header class="header">
+            <img src="logo-poliwood.png" alt="Poliwood" class="logo">
+            <h1>XtraChrono</h1>
+            <p class="subtitle">Sistema centralizado de cronometraje</p>
+        </header>
+
+
+        <main>
+            <div class="timer">
+                <span id="tiempo">00:00:000</span>
+            </div>
+
+            <div class="controls">
+                <button id="startBtn" class="btn start">Iniciar</button>
+                <button id="pauseBtn" class="btn pause">Pausar</button>
+                <button id="stopBtn" class="btn stop">Detener</button>
+            </div>
+        </main>
+
+        <footer>
+            <span id="status">Conectando al servidor...</span>
+        </footer>
+    </div>
+
+    <script src="index.js"></script>
 </body>
 </html>
