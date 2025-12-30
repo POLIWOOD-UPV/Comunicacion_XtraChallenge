@@ -49,25 +49,69 @@ La comunicación se realiza mediante:
 ## 📂 Estructura del proyecto
 
 ```text
-├── client-m5stack/        # Cliente distribuido (estructura conceptual)
-├── docs/                  # Documentación técnica
+INTERA-XtraChrono/
+│
+├── README.md
+├── .gitignore
+│
+├── docs/
+│   ├── memoria.pdf
 │   ├── arquitectura.md
 │   ├── decisiones_tecnicas.md
 │   └── referencias.md
-├── public/                # Cliente web
-│   ├── index.html
-│   ├── index.js
-│   ├── styles.css
-│   └── logo-poliwood.png
-├── src/                   # Servidor
-│   ├── core/
-│   ├── http/
-│   ├── ws/
-│   └── utils/
-├── tests/                 # Pruebas básicas
-├── server.js
-├── package.json
-└── README.md
+│
+├── diagrams/
+│   ├── arquitectura_general.png
+│   ├── flujo_servidor.png
+│   ├── flujo_m5stack.png
+│   └── secuencia_eventos.png
+│
+├── server/
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── .env
+│   │
+│   ├── server.js
+│   ├── ws_server.js
+│   │
+│   ├── src/
+│   │   ├── core/
+│   │   │   ├── cronometro.js
+│   │   │   └── timeSync.js
+│   │   │
+│   │   ├── http/
+│   │   │   ├── eventRoutes.js
+│   │   │   └── statusRoutes.js
+│   │   │
+│   │   ├── ws/
+│   │   │   └── wsHandlers.js
+│   │   │
+│   │   └── utils/
+│   │       ├── logger.js
+│   │       └── constants.js
+│   │
+│   └── public/
+│       ├── index.html
+│       ├── viewer.js
+│       └── styles.css
+│
+├── client-m5stack/
+│   ├── platformio.ini
+│   ├── README.md
+│   │
+│   └── src/
+│       ├── main.cpp
+│       ├── network.cpp
+│       ├── network.h
+│       ├── ui.cpp
+│       ├── ui.h
+│       ├── sound.cpp
+│       ├── sound.h
+│       └── config.h
+│
+└── tests/
+    ├── server.test.js
+    └── cronometro.test.js
 ```
 
 ## ⚙️ Funcionamiento del sistema
