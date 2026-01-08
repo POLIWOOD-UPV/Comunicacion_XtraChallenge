@@ -5,6 +5,7 @@ require('dotenv').config();
 
 const eventRoutes = require('./src/http/eventRoutes');
 const statusRoutes = require('./src/http/statusRoutes');
+const initWebSocket = require('./ws_server');
 
 const app = express();
 
@@ -28,4 +29,5 @@ const server = app.listen(PORT, () => {
 });
 
 // ===== Export (para WebSocket o tests) =====
+initWebSocket(server);
 module.exports = { app, server };
