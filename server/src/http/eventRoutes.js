@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const cronometro = require('../core/cronometro');
+const csvLogger = require('../utils/csvLogger');
 
 // Utilitat per a obtindre info del dispositiu
 function getDeviceInfo(req) {
@@ -19,7 +20,7 @@ router.post('/start', (req, res) => {
     cronometro.start();
 
     console.log(`[START] device=${deviceId} ts=${timestamp}`);
-
+    csvLogger.startNewSession({ deviceId });
     res.json({
         status: 'ok',
         message: 'Cronómetro iniciado',
@@ -48,9 +49,13 @@ router.post('/pause', (req, res) => {
 router.post('/stop', (req, res) => {
     const { deviceId, timestamp } = getDeviceInfo(req);
 
+    const tiempo = cronometro.getTiempo();  // <-- obtener tiempo antes de parar
     cronometro.stop();
 
-    console.log(`[STOP] device=${deviceId} ts=${timestamp}`);
+    console.log(`[STOP] device=${deviceId} ts=${timestamp} tiempo=${tiempo.min}:${tiempo.sec}:${tiempo.ms}`);
+    
+    // Guardar línea final en CSV
+    csvLogger.saveSession({ deviceId, tiempo });
 
     res.json({
         status: 'ok',
@@ -59,6 +64,7 @@ router.post('/stop', (req, res) => {
         serverTime: Date.now()
     });
 });
+
 
 // ===== STATUS / TIEMPO ACTUAL =====
 router.get('/status', (req, res) => {
