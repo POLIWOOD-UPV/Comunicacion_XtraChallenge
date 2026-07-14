@@ -10,6 +10,6 @@ void setup() {
 }
 
 void loop() {
-    handleUI();
     handleNetwork();
+    handleUI();
 }

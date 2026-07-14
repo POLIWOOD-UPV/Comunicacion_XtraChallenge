@@ -61,10 +61,10 @@ INTERA-XtraChrono/
 │   └── referencias.md
 │
 ├── diagrams/
-│   ├── arquitectura_general.png
-│   ├── flujo_servidor.png
-│   ├── flujo_m5stack.png
-│   └── secuencia_eventos.png
+│   ├── Diagrama.pdf
+│   ├── DiagramadeFlujo.txt
+│   ├── POLIWOOD-M5STACK.drawio
+│   └── POLIWOOD-M5STACK.png
 │
 ├── server/
 │   ├── package.json
@@ -88,7 +88,8 @@ INTERA-XtraChrono/
 │   │   │
 │   │   └── utils/
 │   │       ├── logger.js
-│   │       └── constants.js
+│   │       ├── constants.js
+│   │       └── csvLogger.js
 │   │
 │   └── public/
 │       ├── index.html

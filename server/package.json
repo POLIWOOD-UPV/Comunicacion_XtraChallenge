@@ -5,7 +5,10 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "test:core": "node ../tests/cronometro.test.js",
+    "test:http": "node ../tests/http-routes.test.js",
+    "test": "node ../tests/run-all.js"
   },
   "author": "Poliwood",
   "license": "ISC",

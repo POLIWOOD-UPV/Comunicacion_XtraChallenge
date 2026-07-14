@@ -107,6 +107,26 @@ footer {
     color: #fcb1b1;
 }
 
+#status {
+    transition: color 0.2s ease;
+}
+
+.status-info {
+    color: #fcb1b1;
+}
+
+.status-ok {
+    color: #c9ffd8;
+}
+
+.status-conflict {
+    color: #ffe08a;
+}
+
+.status-error {
+    color: #ff9a9a;
+}
+
 /* Header con logo */
 .header {
     display: flex;

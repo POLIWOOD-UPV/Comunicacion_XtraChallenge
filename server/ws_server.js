@@ -2,6 +2,16 @@
 const WebSocket = require('ws');
 const cronometro = require('./src/core/cronometro');
 
+const WS_TICK_MS = Number(process.env.WS_TICK_MS || 100);
+
+function safeSend(ws, payload) {
+    if (ws.readyState !== WebSocket.OPEN) {
+        return;
+    }
+
+    ws.send(JSON.stringify(payload));
+}
+
 function initWebSocket(server) {
     const wss = new WebSocket.Server({ server });
 
@@ -11,19 +21,24 @@ function initWebSocket(server) {
         console.log('Cliente WebSocket conectado');
 
         // Enviar estado inicial
-        ws.send(JSON.stringify({
+        safeSend(ws, {
             type: 'status',
             message: 'Conectado al servidor WebSocket'
-        }));
+        });
 
         // Intervalo para enviar el tiempo del cronómetro
         const intervalId = setInterval(() => {
             const tiempo = cronometro.getTiempo();
-            ws.send(JSON.stringify({
+            safeSend(ws, {
                 type: 'time',
-                payload: tiempo
-            }));
-        }, 50);
+                payload: {
+                    tiempo,
+                    state: cronometro.getState(),
+                    elapsedMs: cronometro.getElapsedMs(),
+                    serverTime: Date.now()
+                }
+            });
+        }, WS_TICK_MS);
 
         ws.on('close', () => {
             console.log('Cliente WebSocket desconectado');
